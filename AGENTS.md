@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Service catalogue, example pricing rules, WhatsApp helper live in src/lib/site.ts — single source until pricing moves to the database.

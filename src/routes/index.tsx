@@ -162,7 +162,7 @@ function Home() {
 function Hero() {
   const navigate = useNavigate();
   const [pet, setPet] = useState("dog");
-  const [service, setService] = useState(services[0].slug as string);
+  const [service, setService] = useState<string>("dog-grooming");
   const [date, setDate] = useState("");
   return (
     <section className="bg-hero">

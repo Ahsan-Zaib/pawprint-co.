@@ -9,13 +9,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { addOns, calculateQuote, money, pricingOptions, services, waLink, type Frequency, type PetSize } from "@/lib/site";
 
-type Search = { service?: string; pet?: string; date?: string };
+type Search = { service?: string | undefined; pet?: string | undefined; date?: string | undefined };
 
 export const Route = createFileRoute("/book")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    service: typeof s.service === "string" ? s.service : undefined,
-    pet: typeof s.pet === "string" ? s.pet : undefined,
-    date: typeof s.date === "string" ? s.date : undefined,
+    service: typeof s["service"] === "string" ? (s["service"] as string) : undefined,
+    pet: typeof s["pet"] === "string" ? (s["pet"] as string) : undefined,
+    date: typeof s["date"] === "string" ? (s["date"] as string) : undefined,
   }),
   head: () => ({
     meta: [

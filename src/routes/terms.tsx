@@ -8,6 +8,8 @@ export const Route = createFileRoute("/terms")({
       { name: "description", content: "The terms that apply to bookings and services with Pawprint & Co." },
       { property: "og:title", content: "Terms & Conditions | Pawprint & Co." },
       { property: "og:description", content: "Booking and service terms." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

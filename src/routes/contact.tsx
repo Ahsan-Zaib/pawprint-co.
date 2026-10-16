@@ -15,6 +15,8 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Get in touch with Pawprint & Co. by WhatsApp, email or our contact form." },
       { property: "og:title", content: "Contact Pawprint & Co." },
       { property: "og:description", content: "Questions about pet care? We'd love to hear from you." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

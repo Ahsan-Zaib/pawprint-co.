@@ -186,7 +186,7 @@
 .home-hero { min-height: 540px; }
 .hero-copy { width: 47%; padding-block: 48px; }
 .hero-title { font-size: 76px; line-height: 0.95; }
-.hero-pets { object-position: center; }
+.hero-pets { object-position: center top; }
 .booking-select { display: block; height: 44px; width: 100%; border: 1px solid var(--input); border-radius: 6px; background: var(--background); padding-inline: 12px; font-size: 14px; color: var(--foreground); font-weight: 400; }
 .service-bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .service-tile { border-radius: 8px; overflow: hidden; transition: transform 250ms ease, box-shadow 250ms ease; }
@@ -200,3 +200,12 @@
 @media (max-width: 1023px) { .hero-title { font-size: 64px; } .hero-copy { width: 48%; } .home-hero { min-height: 530px; } .service-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } .service-tile-featured { grid-column: span 1; display: block; } .service-tile-featured .service-photo { height: 240px; min-height: 0; } }
 @media (max-width: 639px) { .home-hero { min-height: 755px; } .hero-copy { width: 100%; padding-block: 32px; } .hero-title { font-size: 56px; } .hero-title span { display: inline; } .hero-copy h2 { margin-top: 12px; } .hero-copy p { max-width: 330px; } .hero-pets { height: 400px; top: auto; bottom: 0; object-position: right; } .service-bento { gap: 14px; } .service-tile-featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; } .service-tile-featured .service-photo { height: 100%; min-height: 260px; } .service-copy { padding: 16px; } .service-photo { height: 150px; } .service-tile h3, .service-tile:not(.service-tile-featured) h3 { font-size: 19px; } .service-copy p { font-size: 13px; } }
 @media (prefers-reduced-motion: reduce) { .service-tile:hover { transform: none; } }
+
+@media (max-width: 639px) {
+  .home-hero { min-height: 0; padding-bottom: 330px; }
+  .hero-copy { padding-block: 28px; }
+  .hero-title { font-size: 44px; }
+  .hero-pets { height: 330px; object-position: right bottom; }
+  .hero-copy a { padding-inline: 16px; font-size: 14px; }
+  .hero-copy > p:last-child { display: none; }
+}

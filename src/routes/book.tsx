@@ -23,6 +23,8 @@ export const Route = createFileRoute("/book")({
       { name: "description", content: "Request a grooming, walking, sitting, daycare or transport appointment online in a few easy steps." },
       { property: "og:title", content: "Book Pet Care Online | Pawprint & Co." },
       { property: "og:description", content: "Choose a service, add your pet, pick a time and submit your booking request." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: BookPage,

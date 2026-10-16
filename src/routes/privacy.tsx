@@ -8,6 +8,8 @@ export const Route = createFileRoute("/privacy")({
       { name: "description", content: "How Pawprint & Co. collects, uses and protects your personal information." },
       { property: "og:title", content: "Privacy Policy | Pawprint & Co." },
       { property: "og:description", content: "How we handle your data." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

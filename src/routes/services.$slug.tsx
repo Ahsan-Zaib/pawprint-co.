@@ -19,6 +19,8 @@ export const Route = createFileRoute("/services/$slug")({
         { name: "description", content: s.short },
         { property: "og:title", content: `${s.name} | Pawprint & Co.` },
         { property: "og:description", content: s.short },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
     };
   },

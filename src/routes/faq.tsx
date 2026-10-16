@@ -10,6 +10,8 @@ export const Route = createFileRoute("/faq")({
       { name: "description", content: "Answers about booking, pricing, recurring visits, nervous pets and service areas." },
       { property: "og:title", content: "Frequently Asked Questions | Pawprint & Co." },
       { property: "og:description", content: "Everything you need to know before booking pet care." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

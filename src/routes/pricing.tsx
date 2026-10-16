@@ -9,6 +9,8 @@ export const Route = createFileRoute("/pricing")({
       { name: "description", content: "Get an instant estimate for grooming, walking, pet sitting, daycare and pet transport." },
       { property: "og:title", content: "Instant Pet Care Quote | Pawprint & Co." },
       { property: "og:description", content: "Transparent pricing — build your quote and continue straight to booking." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

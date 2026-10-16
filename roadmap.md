@@ -1,4 +1,5 @@
 # Pawprint & Co. roadmap
+- [x] Refresh appearance with forest palette, Outfit lettering and playful photo-led mixed grids
 - [x] Brand design, home, services + 6 detail pages, quote calculator, booking flow, about, reviews, FAQ, contact, policies, WhatsApp
 - [ ] Save bookings/reviews/contact to Lovable Cloud (needs Cloud enabled)
 - [ ] Customer accounts: register/login, dashboard, my pets, bookings, quotes, loyalty

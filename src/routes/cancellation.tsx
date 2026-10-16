@@ -8,6 +8,8 @@ export const Route = createFileRoute("/cancellation")({
       { name: "description", content: "How to cancel or reschedule a Pawprint & Co. appointment." },
       { property: "og:title", content: "Cancellation Policy | Pawprint & Co." },
       { property: "og:description", content: "Cancelling or rescheduling your booking." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

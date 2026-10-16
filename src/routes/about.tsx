@@ -10,6 +10,8 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "Meet Pawprint & Co. — caring, reliable pet care built around your pet's personality." },
       { property: "og:title", content: "About Pawprint & Co." },
       { property: "og:description", content: "Why we believe every pet deserves personal, patient care." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (

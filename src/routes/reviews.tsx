@@ -16,6 +16,8 @@ export const Route = createFileRoute("/reviews")({
       { name: "description", content: "Read genuine reviews from Pawprint & Co. customers and share your own experience." },
       { property: "og:title", content: "Reviews | Pawprint & Co." },
       { property: "og:description", content: "Share your experience with Pawprint & Co." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Reviews,

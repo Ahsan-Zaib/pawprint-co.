@@ -17,7 +17,7 @@ export function PawLogo() {
         <PawIcon className="size-6" />
       </span>
       <span className="font-display text-xl font-semibold leading-none text-primary">
-        Pawprint <span className="italic text-foreground/70">&amp; Co.</span>
+        Pawprint <span className="text-foreground/70">&amp; Co.</span>
       </span>
     </span>
   );

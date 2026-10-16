@@ -10,3 +10,5 @@
 <!-- LOVABLE:END -->
 
 - Service catalogue, example pricing rules, WhatsApp helper live in src/lib/site.ts — single source until pricing moves to the database.
+
+- Homepage presentation lives in the index route with shared visual tokens and responsive tile rules in the global stylesheet; keep service data and booking logic separate to allow visual changes without changing business rules.

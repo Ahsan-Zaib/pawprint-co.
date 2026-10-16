@@ -5,13 +5,13 @@ import { CONTACT_EMAIL, services, waLink } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="mt-24 bg-primary text-primary-foreground">
+    <footer className="bg-primary text-primary-foreground">
       <div className="container-page grid gap-10 py-16 md:grid-cols-4">
         <div className="space-y-4">
           <div className="inline-block rounded-2xl bg-background px-3 py-2">
             <PawLogo />
           </div>
-          <p className="font-display text-2xl italic">Happy Pets. Happier Humans.</p>
+          <p className="font-display text-2xl font-semibold">Happy Pets. Happier Humans.</p>
           <p className="text-sm opacity-80">Loving Care for Every Paw, Every Day.</p>
         </div>
         <div>

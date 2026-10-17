@@ -27,7 +27,15 @@ export function PawIcon({
  * paw prints pop out beside it, then fade. Skipped when the visitor has
  * asked for reduced motion.
  */
-export function PawPress({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function PawPress({
+  children,
+  className = "",
+  printsTo = "right",
+}: {
+  children: ReactNode;
+  className?: string;
+  printsTo?: "right" | "left";
+}) {
   const host = useRef<HTMLSpanElement>(null);
   const [prints, setPrints] = useState(0);
   const timer = useRef<number | undefined>(undefined);
@@ -59,12 +67,20 @@ export function PawPress({ children, className = "" }: { children: ReactNode; cl
     >
       {children}
       {prints > 0 && (
-        <span key={prints} className="paw-print-burst" aria-hidden="true">
+        <span
+          key={prints}
+          className={`paw-print-burst ${printsTo === "left" ? "paw-print-burst--left" : "paw-print-burst--right"}`}
+          aria-hidden="true"
+        >
           {[0, 1, 2].map((i) => (
             <PawIcon
               key={i}
-              className={`paw-print size-3.5 ${i % 2 ? "paw-print-b" : "paw-print-a"}`}
-              style={{ animationDelay: `${i * 110}ms`, left: `${i * 17}px`, bottom: `${i * 7}px` }}
+              className={`paw-print size-4 ${i % 2 ? "paw-print-b" : "paw-print-a"}`}
+              style={{
+                animationDelay: `${i * 110}ms`,
+                ...(printsTo === "left" ? { right: `${i * 18}px` } : { left: `${i * 18}px` }),
+                bottom: `${24 - i * 13}px`,
+              }}
             />
           ))}
         </span>

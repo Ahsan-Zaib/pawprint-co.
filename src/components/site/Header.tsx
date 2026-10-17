@@ -37,7 +37,7 @@ export function Header() {
           <Button asChild size="lg" className="hidden rounded-full sm:inline-flex">
             <Link to="/book">Book a Service</Link>
           </Button>
-          <PawPress>
+          <PawPress printsTo="left">
             <Button variant="ghost" size="icon"
               data-paw-press
               className="rounded-full p-2 text-primary hover:bg-secondary lg:hidden"

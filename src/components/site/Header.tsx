@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PawLogo } from "./Paw";
+import { PawLogo, PawPress } from "./Paw";
 
 const nav = [
   { to: "/services", label: "Services" },
@@ -19,7 +19,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur-md">
       <div className="container-page flex h-18 items-center justify-between gap-4 py-3">
         <Link to="/" className="flex items-center gap-2" aria-label="Pawprint & Co. home">
-          <PawLogo />
+          <PawLogo interactive />
         </Link>
         <nav className="hidden items-center gap-0 xl:gap-1 lg:flex" aria-label="Main">
           {nav.map((n) => (
@@ -37,14 +37,16 @@ export function Header() {
           <Button asChild size="lg" className="hidden rounded-full sm:inline-flex">
             <Link to="/book">Book a Service</Link>
           </Button>
-          <Button variant="ghost" size="icon"
-            className="rounded-full p-2 text-primary hover:bg-secondary lg:hidden"
-            onClick={() => setOpen((o) => !o)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-          >
-            {open ? <X /> : <Menu />}
-          </Button>
+          <PawPress>
+            <Button variant="ghost" size="icon"
+              className="rounded-full p-2 text-primary hover:bg-secondary lg:hidden"
+              onClick={() => setOpen((o) => !o)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+            >
+              {open ? <X /> : <Menu />}
+            </Button>
+          </PawPress>
         </div>
       </div>
       {open && (

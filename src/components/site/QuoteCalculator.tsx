@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
+import { PetTypeSelect } from "./PetTypeSelect";
 import {
   addOns,
   calculateQuote,
@@ -22,7 +23,7 @@ const chip =
 
 export function QuoteCalculator({ compact = false }: { compact?: boolean }) {
   const navigate = useNavigate();
-  const [petType, setPetType] = useState("dog");
+  const [petType, setPetType] = useState("");
   const [pets, setPets] = useState(1);
   const [size, setSize] = useState<PetSize>("medium");
   const [optionIds, setOptionIds] = useState<string[]>(["walk-30"]);
@@ -48,14 +49,8 @@ export function QuoteCalculator({ compact = false }: { compact?: boolean }) {
     <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
       <div className="space-y-6 rounded-3xl bg-card p-6 shadow-soft md:p-8">
         <div>
-          <Label className="mb-3 block font-semibold">Pet type</Label>
-          <div className="flex flex-wrap gap-2">
-            {["dog", "cat", "other"].map((t) => (
-              <button key={t} type="button" data-on={petType === t} className={chip} onClick={() => setPetType(t)}>
-                {t === "dog" ? "🐶 Dog" : t === "cat" ? "🐱 Cat" : "🐰 Other"}
-              </button>
-            ))}
-          </div>
+          <Label htmlFor="quote-pet-type" className="mb-3 block font-semibold">Pet type</Label>
+          <PetTypeSelect id="quote-pet-type" value={petType} onChange={setPetType} />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>

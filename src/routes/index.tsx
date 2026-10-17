@@ -9,11 +9,12 @@ import { services, waLink } from "@/lib/site";
 import { faqs } from "@/lib/faq";
 import { PawIcon } from "@/components/site/Paw";
 import { QuoteCalculator } from "@/components/site/QuoteCalculator";
+import { PetTypeSelect } from "@/components/site/PetTypeSelect";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
     { title: "Pawprint & Co. — Happy Pets. Happier Humans." },
-    { name: "description", content: "Thoughtful pet grooming, joyful dog walks, sitting and daycare. Find your pet's perfect care with Pawprint & Co." },
+    { name: "description", content: "Thoughtful pet grooming, walking and exercise, sitting and daycare. Find your pet's perfect care with Pawprint & Co." },
     { property: "og:title", content: "Pawprint & Co. — Happy Pets. Happier Humans." },
     { property: "og:description", content: "Loving care for every paw, every day. Explore services, get a quote and request a booking." },
     { property: "og:type", content: "website" },
@@ -73,7 +74,7 @@ function Home() {
 
 function Hero() {
   const navigate = useNavigate();
-  const [pet, setPet] = useState("dog");
+  const [pet, setPet] = useState("");
   const [service, setService] = useState("dog-grooming");
   const [date, setDate] = useState("");
   return <>

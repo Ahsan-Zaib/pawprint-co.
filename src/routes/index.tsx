@@ -9,11 +9,12 @@ import { services, waLink } from "@/lib/site";
 import { faqs } from "@/lib/faq";
 import { PawIcon } from "@/components/site/Paw";
 import { QuoteCalculator } from "@/components/site/QuoteCalculator";
+import { PetTypeSelect } from "@/components/site/PetTypeSelect";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
     { title: "Pawprint & Co. — Happy Pets. Happier Humans." },
-    { name: "description", content: "Thoughtful pet grooming, joyful dog walks, sitting and daycare. Find your pet's perfect care with Pawprint & Co." },
+    { name: "description", content: "Thoughtful pet grooming, walking and exercise, sitting and daycare. Find your pet's perfect care with Pawprint & Co." },
     { property: "og:title", content: "Pawprint & Co. — Happy Pets. Happier Humans." },
     { property: "og:description", content: "Loving care for every paw, every day. Explore services, get a quote and request a booking." },
     { property: "og:type", content: "website" },
@@ -73,7 +74,7 @@ function Home() {
 
 function Hero() {
   const navigate = useNavigate();
-  const [pet, setPet] = useState("dog");
+  const [pet, setPet] = useState("");
   const [service, setService] = useState("dog-grooming");
   const [date, setDate] = useState("");
   return <>
@@ -81,6 +82,6 @@ function Hero() {
       <img src={hero} alt="Happy golden retriever and fluffy ginger cat sitting together" width={1920} height={1024} fetchPriority="high" className="hero-pets absolute inset-0 size-full object-cover" />
       <div className="container-page relative z-10"><div className="hero-copy"><p className="mb-5 flex items-center gap-2 text-sm font-semibold text-primary"><span className="h-2 w-2 rounded-full bg-primary" /> HAPPY PETS. HAPPIER HUMANS.</p><h1 className="hero-title font-semibold">Pawprint <span className="block">&amp; Co.</span></h1><h2 className="mt-4 text-2xl font-medium md:text-3xl">Big love for little paws.</h2><p className="mt-4 max-w-sm text-base leading-relaxed text-foreground/75">Fresh grooms, joyful walks and loving care. A happier everyday for your best friend.</p><div className="mt-7 flex flex-wrap gap-3"><Button asChild size="lg" className="rounded-full"><Link to="/book"><CalendarHeart className="size-4" /> Book a Service <ArrowRight className="size-4" /></Link></Button><Button asChild variant="outline" size="lg" className="rounded-full border-primary/25 bg-card/70"><Link to="/pricing">Get a Quote</Link></Button></div><p className="mt-5 flex items-center gap-2 text-xs font-medium text-primary/80"><Check className="size-4" /> Their personality. Their routine. Their care.</p></div></div>
     </section>
-    <section className="border-y border-border bg-card"><form onSubmit={(e) => { e.preventDefault(); navigate({ to: "/book", search: { service, pet, date } }); }} className="container-page grid items-end gap-4 py-6 sm:grid-cols-2 lg:grid-cols-[1fr_0.7fr_1.3fr_1fr_auto]"><div className="self-center"><p className="font-display text-xl font-semibold text-primary">A happy day awaits.</p><p className="mt-1 text-xs text-muted-foreground">Find their perfect care.</p></div><label className="space-y-2 text-xs font-semibold text-primary">Your companion<select aria-label="Pet type" value={pet} onChange={(e) => setPet(e.target.value)} className="booking-select"><option value="dog">Dog</option><option value="cat">Cat</option><option value="other">Other pet</option></select></label><label className="space-y-2 text-xs font-semibold text-primary">A little of what they love<select aria-label="Service" value={service} onChange={(e) => setService(e.target.value)} className="booking-select">{services.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}</select></label><label className="space-y-2 text-xs font-semibold text-primary">Preferred date<Input aria-label="Preferred date" type="date" value={date} onChange={(e) => setDate(e.target.value)} className="h-11 bg-background" /></label><Button type="submit" className="h-11 rounded-full">Let’s go <ArrowRight className="size-4" /></Button></form></section>
+    <section className="border-y border-border bg-card"><form onSubmit={(e) => { e.preventDefault(); navigate({ to: "/book", search: { service, pet, date } }); }} className="container-page grid items-end gap-4 py-6 sm:grid-cols-2 lg:grid-cols-[1fr_0.7fr_1.3fr_1fr_auto]"><div className="self-center"><p className="font-display text-xl font-semibold text-primary">A happy day awaits.</p><p className="mt-1 text-xs text-muted-foreground">Find their perfect care.</p></div><label className="space-y-2 text-xs font-semibold text-primary">Your companion<PetTypeSelect value={pet} onChange={setPet} className="h-11 bg-background" /></label><label className="space-y-2 text-xs font-semibold text-primary">A little of what they love<select aria-label="Service" value={service} onChange={(e) => setService(e.target.value)} className="booking-select">{services.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}</select></label><label className="space-y-2 text-xs font-semibold text-primary">Preferred date<Input aria-label="Preferred date" type="date" value={date} onChange={(e) => setDate(e.target.value)} className="h-11 bg-background" /></label><Button type="submit" className="h-11 rounded-full">Let’s go <ArrowRight className="size-4" /></Button></form></section>
   </>;
 }

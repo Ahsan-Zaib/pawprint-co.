@@ -7,7 +7,7 @@ export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
       { title: "Pet Services — Grooming, Walking, Sitting & More | Pawprint & Co." },
-      { name: "description", content: "Explore dog grooming, dog walking, pet sitting, daycare, boarding and pet transport from Pawprint & Co." },
+      { name: "description", content: "Explore pet grooming, pet walking and exercise, pet sitting, daycare, boarding and pet transport from Pawprint & Co." },
       { property: "og:title", content: "Pet Services | Pawprint & Co." },
       { property: "og:description", content: "Every service tailored to your pet's needs, temperament and routine." },
       { property: "og:type", content: "website" },

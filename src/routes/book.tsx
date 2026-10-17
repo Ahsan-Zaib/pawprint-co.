@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { PetTypeSelect } from "@/components/site/PetTypeSelect";
 import { addOns, calculateQuote, money, pricingOptions, services, waLink, type Frequency, type PetSize } from "@/lib/site";
 
 type Search = { service?: string | undefined; pet?: string | undefined; date?: string | undefined };
@@ -42,7 +43,7 @@ function BookPage() {
     const first = pricingOptions.find((o) => o.service === search.service);
     return first ? [first.id] : [];
   });
-  const [pets, setPets] = useState<Pet[]>([{ name: "", type: search.pet ?? "dog", breed: "", size: "medium" }]);
+  const [pets, setPets] = useState<Pet[]>([{ name: "", type: search.pet ?? "", breed: "", size: "medium" }]);
   const [addOnIds, setAddOnIds] = useState<string[]>([]);
   const [frequency, setFrequency] = useState<Frequency>("one-time");
   const [date, setDate] = useState(search.date ?? "");
@@ -62,7 +63,7 @@ function BookPage() {
       setFrequency(q.frequency ?? "one-time");
       setC((p) => ({ ...p, postcode: q.postcode ?? "" }));
       setNotes((n) => ({ ...n, other: q.notes ?? "" }));
-      setPets(Array.from({ length: q.pets ?? 1 }, () => ({ name: "", type: q.petType ?? "dog", breed: "", size: q.size ?? "medium" })));
+      setPets(Array.from({ length: q.pets ?? 1 }, () => ({ name: "", type: q.petType ?? "", breed: "", size: q.size ?? "medium" })));
     } catch {
       /* ignore */
     }
@@ -167,9 +168,7 @@ function BookPage() {
                     <Field label="Pet name *"><Input value={p.name} onChange={(e) => setPets(pets.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)))} /></Field>
                     <Field label="Breed"><Input value={p.breed} onChange={(e) => setPets(pets.map((x, j) => (j === i ? { ...x, breed: e.target.value } : x)))} /></Field>
                     <Field label="Type">
-                      <select value={p.type} onChange={(e) => setPets(pets.map((x, j) => (j === i ? { ...x, type: e.target.value } : x)))} className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm">
-                        <option value="dog">Dog</option><option value="cat">Cat</option><option value="other">Other</option>
-                      </select>
+                      <PetTypeSelect label={`Pet type ${i + 1}`} value={p.type} onChange={(type) => setPets(pets.map((x, j) => (j === i ? { ...x, type } : x)))} />
                     </Field>
                     <Field label="Size">
                       <select value={p.size} onChange={(e) => setPets(pets.map((x, j) => (j === i ? { ...x, size: e.target.value as PetSize } : x)))} className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm">
@@ -179,7 +178,7 @@ function BookPage() {
                     {pets.length > 1 && <button type="button" className="text-left text-sm text-destructive" onClick={() => setPets(pets.filter((_, j) => j !== i))}>Remove</button>}
                   </div>
                 ))}
-                <Button type="button" variant="outline" className="rounded-full" onClick={() => setPets([...pets, { name: "", type: "dog", breed: "", size: "medium" }])}>+ Add another pet</Button>
+                <Button type="button" variant="outline" className="rounded-full" onClick={() => setPets([...pets, { name: "", type: "", breed: "", size: "medium" }])}>+ Add another pet</Button>
               </div>
             )}
             {step === 2 && (

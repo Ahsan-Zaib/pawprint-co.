@@ -12,3 +12,4 @@
 - Service catalogue, example pricing rules, WhatsApp helper live in src/lib/site.ts — single source until pricing moves to the database.
 
 - Homepage presentation lives in the index route with shared visual tokens and responsive tile rules in the global stylesheet; keep service data and booking logic separate to allow visual changes without changing business rules.
+- Use the shared PetTypeSelect for pet species entry across home, quote and booking so suggested and custom species remain consistent; preserve existing service slugs and option IDs when renaming displayed categories to keep links and saved selections working.

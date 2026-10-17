@@ -1,6 +1,18 @@
-export function PawIcon({ className = "" }: { className?: string }) {
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
+
+export function PawIcon({
+  className = "",
+  style,
+}: {
+  className?: string;
+  style?: CSSProperties;
+}) {
   return (
-    <svg viewBox="0 0 64 64" className={className} fill="currentColor" aria-hidden="true">
+    <svg viewBox="0 0 64 64" className={className} style={style} fill="currentColor" aria-hidden="true">
       <ellipse cx="20" cy="18" rx="6" ry="8" />
       <ellipse cx="44" cy="18" rx="6" ry="8" />
       <ellipse cx="9" cy="33" rx="5.5" ry="7" />
@@ -10,10 +22,80 @@ export function PawIcon({ className = "" }: { className?: string }) {
   );
 }
 
-export function PawLogo() {
+/**
+ * Press feedback for a control: it dips like a paw stepping down and a few
+ * paw prints pop out beside it, then fade. Skipped when the visitor has
+ * asked for reduced motion.
+ */
+export function PawPress({
+  children,
+  className = "",
+  printsTo = "right",
+}: {
+  children: ReactNode;
+  className?: string;
+  printsTo?: "right" | "left";
+}) {
+  const host = useRef<HTMLSpanElement>(null);
+  const [prints, setPrints] = useState(0);
+  const timer = useRef<number | undefined>(undefined);
+
+  useEffect(() => () => window.clearTimeout(timer.current), []);
+
+  const fire = () => {
+    if (prefersReducedMotion()) return;
+    const node = (host.current?.querySelector("[data-paw-press]") ??
+      host.current) as HTMLElement | null;
+    if (node) {
+      node.classList.remove("paw-pressed");
+      void node.offsetWidth;
+      node.classList.add("paw-pressed");
+    }
+    setPrints((p) => p + 1);
+    window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => setPrints(0), 900);
+  };
+
   return (
+    <span
+      ref={host}
+      className={`relative inline-flex ${className}`}
+      onPointerDown={fire}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") fire();
+      }}
+    >
+      {children}
+      {prints > 0 && (
+        <span
+          key={prints}
+          className={`paw-print-burst ${printsTo === "left" ? "paw-print-burst--left" : "paw-print-burst--right"}`}
+          aria-hidden="true"
+        >
+          {[0, 1, 2].map((i) => (
+            <PawIcon
+              key={i}
+              className={`paw-print size-4 ${i % 2 ? "paw-print-b" : "paw-print-a"}`}
+              style={{
+                animationDelay: `${i * 110}ms`,
+                ...(printsTo === "left" ? { right: `${i * 18}px` } : { left: `${i * 18}px` }),
+                bottom: `${8 - i * 14}px`,
+              }}
+            />
+          ))}
+        </span>
+      )}
+    </span>
+  );
+}
+
+export function PawLogo({ interactive = false }: { interactive?: boolean }) {
+  const logo = (
     <span className="flex items-center gap-2">
-      <span className="grid size-10 place-items-center rounded-2xl bg-primary text-gold">
+      <span
+        data-paw-press
+        className="grid size-10 place-items-center rounded-2xl bg-primary text-gold"
+      >
         <PawIcon className="size-6" />
       </span>
       <span className="font-display text-xl font-semibold leading-none text-primary">
@@ -21,6 +103,7 @@ export function PawLogo() {
       </span>
     </span>
   );
+  return interactive ? <PawPress className="w-full">{logo}</PawPress> : logo;
 }
 
 /** A trail of paw prints that "walk" in sequence. */

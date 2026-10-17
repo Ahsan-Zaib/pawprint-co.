@@ -79,7 +79,7 @@ export function PawPress({
               style={{
                 animationDelay: `${i * 110}ms`,
                 ...(printsTo === "left" ? { right: `${i * 18}px` } : { left: `${i * 18}px` }),
-                bottom: `${24 - i * 13}px`,
+                bottom: `${8 - i * 14}px`,
               }}
             />
           ))}

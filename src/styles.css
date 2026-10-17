@@ -192,13 +192,13 @@
 }
 .paw-print-burst {
   position: absolute;
-  bottom: -28px;
+  bottom: -34px;
   width: 96px;
-  height: 68px;
+  height: 76px;
   pointer-events: none;
 }
-.paw-print-burst--right { left: 26px; }
-.paw-print-burst--left { right: 26px; }
+.paw-print-burst--right { left: 34px; }
+.paw-print-burst--left { right: 34px; }
 .paw-print {
   position: absolute;
   opacity: 0;

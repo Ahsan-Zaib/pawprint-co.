@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Pawprint & Co. — Happy Pets. Happier Humans." },
-      { name: "description", content: "Loving pet grooming, dog walking, pet sitting, daycare and pet transport with online quotes and booking." },
+      { name: "description", content: "Loving pet grooming, pet walking and exercise, pet sitting, daycare and pet transport with online quotes and booking." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
           ],

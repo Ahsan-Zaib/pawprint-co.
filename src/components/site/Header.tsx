@@ -39,6 +39,7 @@ export function Header() {
           </Button>
           <PawPress>
             <Button variant="ghost" size="icon"
+              data-paw-press
               className="rounded-full p-2 text-primary hover:bg-secondary lg:hidden"
               onClick={() => setOpen((o) => !o)}
               aria-label={open ? "Close menu" : "Open menu"}

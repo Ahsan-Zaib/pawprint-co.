@@ -36,7 +36,8 @@ export function PawPress({ children, className = "" }: { children: ReactNode; cl
 
   const fire = () => {
     if (prefersReducedMotion()) return;
-    const node = host.current;
+    const node = (host.current?.querySelector("[data-paw-press]") ??
+      host.current) as HTMLElement | null;
     if (node) {
       node.classList.remove("paw-pressed");
       void node.offsetWidth;
@@ -73,19 +74,20 @@ export function PawPress({ children, className = "" }: { children: ReactNode; cl
 }
 
 export function PawLogo({ interactive = false }: { interactive?: boolean }) {
-  const badge = (
-    <span className="grid size-10 place-items-center rounded-2xl bg-primary text-gold">
-      <PawIcon className="size-6" />
-    </span>
-  );
-  return (
+  const logo = (
     <span className="flex items-center gap-2">
-      {interactive ? <PawPress>{badge}</PawPress> : badge}
+      <span
+        data-paw-press
+        className="grid size-10 place-items-center rounded-2xl bg-primary text-gold"
+      >
+        <PawIcon className="size-6" />
+      </span>
       <span className="font-display text-xl font-semibold leading-none text-primary">
         Pawprint <span className="text-foreground/70">&amp; Co.</span>
       </span>
     </span>
   );
+  return interactive ? <PawPress className="w-full">{logo}</PawPress> : logo;
 }
 
 /** A trail of paw prints that "walk" in sequence. */

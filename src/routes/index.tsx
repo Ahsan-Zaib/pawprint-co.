@@ -10,6 +10,7 @@ import { faqs } from "@/lib/faq";
 import { PawIcon } from "@/components/site/Paw";
 import { QuoteCalculator } from "@/components/site/QuoteCalculator";
 import { PetTypeSelect } from "@/components/site/PetTypeSelect";
+import { Reveal } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -26,10 +27,14 @@ export const Route = createFileRoute("/")({
 function Home() {
   return <>
     <Hero />
-    <div className="bg-primary text-primary-foreground">
-      <ul className="container-page flex flex-wrap items-center justify-between gap-x-8 gap-y-4 py-5">
-        {["A little care. A lot of love.", "Every personality welcome", "Their routine, our priority", "Loving care for every paw"].map((text) => <li key={text} className="flex items-center gap-3 text-sm font-medium"><PawIcon className="size-4 text-mint" />{text}</li>)}
-      </ul>
+    <div className="overflow-hidden bg-primary py-5 text-primary-foreground">
+      <div className="marquee-track gap-12">
+        {[0, 1].map((copy) => (
+          <ul key={copy} className="flex items-center gap-12" aria-hidden={copy === 1}>
+            {["A little care. A lot of love.", "Every personality welcome", "Their routine, our priority", "Loving care for every paw"].map((text) => <li key={text} className="flex shrink-0 items-center gap-3 text-sm font-medium"><PawIcon className="size-4 text-mint" />{text}</li>)}
+          </ul>
+        ))}
+      </div>
     </div>
 
     <section className="container-page py-16 md:py-20">

@@ -37,7 +37,7 @@ function Home() {
       </div>
     </div>
 
-    <section className="container-page py-16 md:py-20">
+    <Reveal as="section" className="container-page py-16 md:py-20">
       <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
         <div><p className="eyebrow mb-3">Good days start with good care</p><h2 className="text-4xl font-semibold md:text-5xl">Little paws. Big possibilities.</h2></div>
         <Button asChild variant="outline" className="rounded-full"><Link to="/services">All our services <ArrowRight className="size-4" /></Link></Button>
@@ -48,19 +48,19 @@ function Home() {
           <div className="service-copy"><span className="text-xs font-semibold uppercase tracking-wider text-primary/70">0{i + 1} / {i === 0 ? "Fresh & fluffy" : i === 1 ? "Out & about" : i === 2 ? "Home sweet home" : i === 3 ? "Stay & play" : i === 4 ? "On the move" : "A little extra"}</span><h3 className="mt-2 text-2xl font-semibold">{s.name}</h3><p className="mt-2 max-w-sm text-sm text-foreground/75">{s.short}</p><span className="mt-5 flex items-center justify-between text-sm font-semibold">Explore service <span className="grid size-9 place-items-center rounded-full bg-card text-primary transition-transform group-hover:-rotate-45"><ArrowRight className="size-4" /></span></span></div>
         </Link>)}
       </div>
-    </section>
+    </Reveal>
 
-    <section className="bg-secondary/40 py-16 md:py-20">
+    <Reveal as="section" className="bg-secondary/40 py-16 md:py-20">
       <div className="container-page grid items-center gap-10 md:grid-cols-[0.9fr_1.1fr]">
         <div className="relative"><img src={services[2]?.image} alt="A cat enjoying gentle care at home" width={1024} height={768} loading="lazy" className="aspect-[5/4] w-full rounded-lg object-cover" /><span className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-card px-5 py-3 text-sm font-semibold text-primary"><Heart className="size-4 fill-current" /> More than a pet. Part of the family.</span></div>
         <div><p className="eyebrow mb-4">The Pawprint promise</p><h2 className="max-w-lg text-4xl font-semibold md:text-5xl">Their quirks.<br />Their comforts.<br /><span className="text-muted-foreground">Our kind of care.</span></h2><p className="mt-5 max-w-lg text-foreground/75">The enthusiastic tail-waggers. The shy little souls. The sofa-loving seniors. We get to know their personality, so every visit feels like it was made just for them.</p><div className="mt-7 grid gap-5 sm:grid-cols-2">{[[Heart, "Kindness comes first"], [ShieldCheck, "Thoughtful handling"], [Sparkles, "Care that fits their routine"], [MessageCircle, "A friendly hello away"]].map(([Icon, text]) => { const I = Icon as typeof Heart; return <div key={text as string} className="flex items-center gap-3 text-sm font-semibold"><I className="size-5 shrink-0 text-primary" />{text as string}</div>; })}</div><Button asChild variant="link" className="mt-6 px-0"><Link to="/about">Get to know Pawprint & Co. <ArrowRight className="size-4" /></Link></Button></div>
       </div>
     </section>
 
-    <section className="container-page py-16 md:py-20">
+    <Reveal as="section" className="container-page py-16 md:py-20">
       <div className="mb-9"><p className="eyebrow mb-3">A little planning, a lot of tail-wagging</p><h2 className="text-4xl font-semibold md:text-5xl">Their next happy day starts here.</h2></div>
       <QuoteCalculator compact />
-    </section>
+    </Reveal>
 
     <section className="border-y border-border py-14">
       <div className="container-page"><div className="mb-9 flex flex-wrap items-center justify-between gap-5"><h2 className="text-3xl font-semibold">Less hassle. More happy.</h2><p className="text-sm text-muted-foreground">A simple start to a lovely routine.</p></div><ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{["Choose their care", "Tell us about your pet", "Pick a date & time", "We confirm & care"].map((text, i) => <li key={text} className="flex items-center gap-4"><span className="grid size-12 shrink-0 place-items-center rounded-full bg-accent font-display text-xl font-semibold text-primary">0{i + 1}</span><p className="font-semibold">{text}</p></li>)}</ol></div>
@@ -84,8 +84,10 @@ function Hero() {
   const [date, setDate] = useState("");
   return <>
     <section className="home-hero relative overflow-hidden bg-secondary">
+      <div className="animate-blob absolute -top-24 -left-24 size-96 rounded-full bg-mint/50 blur-3xl" aria-hidden="true" />
+      <div className="animate-blob absolute top-1/3 right-1/4 size-72 rounded-full bg-peach/60 blur-3xl" style={{ animationDelay: "-6s" }} aria-hidden="true" />
       <img src={hero} alt="Happy golden retriever and fluffy ginger cat sitting together" width={1920} height={1024} fetchPriority="high" className="hero-pets absolute inset-0 size-full object-cover" />
-      <div className="container-page relative z-10"><div className="hero-copy"><p className="mb-5 flex items-center gap-2 text-sm font-semibold text-primary"><span className="h-2 w-2 rounded-full bg-primary" /> HAPPY PETS. HAPPIER HUMANS.</p><h1 className="hero-title font-semibold">Pawprint <span className="block">&amp; Co.</span></h1><h2 className="mt-4 text-2xl font-medium md:text-3xl">Big love for little paws.</h2><p className="mt-4 max-w-sm text-base leading-relaxed text-foreground/75">Fresh grooms, joyful walks and loving care. A happier everyday for your best friend.</p><div className="mt-7 flex flex-wrap gap-3"><Button asChild size="lg" className="rounded-full"><Link to="/book"><CalendarHeart className="size-4" /> Book a Service <ArrowRight className="size-4" /></Link></Button><Button asChild variant="outline" size="lg" className="rounded-full border-primary/25 bg-card/70"><Link to="/pricing">Get a Quote</Link></Button></div><p className="mt-5 flex items-center gap-2 text-xs font-medium text-primary/80"><Check className="size-4" /> Their personality. Their routine. Their care.</p></div></div>
+      <div className="container-page relative z-10"><div className="hero-copy"><p className="mb-5 flex items-center gap-2 text-sm font-semibold text-primary"><span className="h-2 w-2 rounded-full bg-primary" /> HAPPY PETS. HAPPIER HUMANS.</p><h1 className="hero-title font-semibold">Pawprint <span className="block">&amp; Co.</span></h1><h2 className="mt-4 text-2xl font-medium md:text-3xl">Big love for little paws.</h2><p className="mt-4 max-w-sm text-base leading-relaxed text-foreground/75">Fresh grooms, joyful walks and loving care. A happier everyday for your best friend.</p><div className="mt-7 flex flex-wrap gap-3"><Button asChild size="lg" className="btn-sheen rounded-full"><Link to="/book"><CalendarHeart className="size-4" /> Book a Service <ArrowRight className="size-4" /></Link></Button><Button asChild variant="outline" size="lg" className="rounded-full border-primary/25 bg-card/70"><Link to="/pricing">Get a Quote</Link></Button></div><p className="mt-5 flex items-center gap-2 text-xs font-medium text-primary/80"><Check className="size-4" /> Their personality. Their routine. Their care.</p></div></div>
     </section>
     <section className="border-y border-border bg-card"><form onSubmit={(e) => { e.preventDefault(); navigate({ to: "/book", search: { service, pet, date } }); }} className="container-page grid items-end gap-4 py-6 sm:grid-cols-2 lg:grid-cols-[1fr_0.7fr_1.3fr_1fr_auto]"><div className="self-center"><p className="font-display text-xl font-semibold text-primary">A happy day awaits.</p><p className="mt-1 text-xs text-muted-foreground">Find their perfect care.</p></div><label className="space-y-2 text-xs font-semibold text-primary">Your companion<PetTypeSelect value={pet} onChange={setPet} className="h-11 bg-background" /></label><label className="space-y-2 text-xs font-semibold text-primary">A little of what they love<select aria-label="Service" value={service} onChange={(e) => setService(e.target.value)} className="booking-select">{services.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}</select></label><label className="space-y-2 text-xs font-semibold text-primary">Preferred date<Input aria-label="Preferred date" type="date" value={date} onChange={(e) => setDate(e.target.value)} className="h-11 bg-background" /></label><Button type="submit" className="h-11 rounded-full">Let’s go <ArrowRight className="size-4" /></Button></form></section>
   </>;

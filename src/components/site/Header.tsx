@@ -26,7 +26,7 @@ export function Header() {
             <Link
               key={n.to}
               to={n.to}
-              className="rounded-full px-2.5 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
+              className="link-grow rounded-full px-2.5 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
               activeProps={{ className: "bg-secondary text-primary" }}
             >
               {n.label}

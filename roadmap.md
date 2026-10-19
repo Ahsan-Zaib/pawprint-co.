@@ -1,4 +1,5 @@
 # Pawprint & Co. roadmap
+- [x] Motion upgrade: scroll reveals, page fade transitions, hero Ken Burns + drifting blobs + floating paws, scrolling marquee, nav underlines, button sheen
 - [x] Paw-press feedback with a paw-print trail when clicking the logo or the small menu button
 - [x] Use one editable pet-type selector across home, quote and booking; make service wording pet-neutral
 - [x] Refresh appearance with forest palette, Outfit lettering and playful photo-led mixed grids

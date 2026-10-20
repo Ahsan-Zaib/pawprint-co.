@@ -9,7 +9,11 @@ function prepareContent(children: ReactNode, text = false, wordIndex = { value: 
       ));
     }
     if (!isValidElement<{ children?: ReactNode; className?: string }>(child)) return child;
-    if (typeof child.type !== "string") return child.props.children ? cloneElement(child, { children: prepareContent(child.props.children) }) : child;
+    if (typeof child.type !== "string") {
+      if (!child.props.children) return child;
+      const prepared = prepareContent(child.props.children);
+      return cloneElement(child, { children: isValidElement(child.props.children) && Array.isArray(prepared) ? prepared[0] : prepared });
+    }
     const isText = /^(h[1-3]|p)$/.test(child.type);
     const isPhoto = child.props.className?.split(" ").includes("service-photo") || (child.type === "div" && Children.toArray(child.props.children).some((node) => isValidElement(node) && node.type === "img"));
     const className = [child.props.className, isText ? "scroll-text" : isPhoto ? "scroll-photo" : ""].filter(Boolean).join(" ");

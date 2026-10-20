@@ -293,6 +293,8 @@
   .scroll-text.scroll-ready .reveal-word { opacity: 1; filter: none; transform: none; }
   .scroll-photo.scroll-ready > img { opacity: 1; clip-path: none; transform: none; filter: none; }
   .scroll-photo.scroll-ready::after { display: none; }
+  .scroll-photo::before { display: none; }
+  .scroll-photo.scroll-shown { box-shadow: none; }
 }
 
 @keyframes route-enter {

@@ -232,21 +232,21 @@
   opacity: 1; filter: blur(0); transform: translateY(0) rotate(0);
 }
 .scroll-photo { overflow: hidden; }
-.scroll-photo.scroll-ready {
+.scroll-photo.scroll-ready > img {
   clip-path: inset(0 100% 0 0 round 8px);
   transition: clip-path 1300ms cubic-bezier(0.76, 0, 0.24, 1);
   transition-delay: var(--reveal-delay);
 }
-.scroll-photo.scroll-shown { clip-path: inset(0 0 0 0 round 8px); }
+.scroll-photo.scroll-shown > img { clip-path: inset(0 0 0 0 round 8px); }
 .scroll-photo.scroll-ready > img {
   scale: 1.16;
   filter: blur(6px);
-  transition: scale 1600ms cubic-bezier(0.16, 1, 0.3, 1), filter 1100ms ease;
+  transition: clip-path 1300ms cubic-bezier(0.76, 0, 0.24, 1), scale 1600ms cubic-bezier(0.16, 1, 0.3, 1), filter 1100ms ease;
 }
 .scroll-photo.scroll-shown > img { scale: 1; filter: blur(0); }
 @media (prefers-reduced-motion: reduce) {
   .scroll-text.scroll-ready .reveal-word { opacity: 1; filter: none; transform: none; }
-  .scroll-photo.scroll-ready { clip-path: none; }
+  .scroll-photo.scroll-ready > img { clip-path: none; }
   .scroll-photo.scroll-ready > img { scale: 1; filter: none; }
 }
 

@@ -8,7 +8,8 @@ function prepareContent(children: ReactNode, text = false, wordIndex = { value: 
         <span key={i} className="reveal-word" style={{ "--word-delay": `${Math.min(wordIndex.value++ * 36, 720)}ms` } as CSSProperties}>{word}</span>
       ));
     }
-    if (!isValidElement<{ children?: ReactNode; className?: string }>(child) || typeof child.type !== "string") return child;
+    if (!isValidElement<{ children?: ReactNode; className?: string }>(child)) return child;
+    if (typeof child.type !== "string") return child.props.children ? cloneElement(child, { children: prepareContent(child.props.children) }) : child;
     const isText = /^(h[1-3]|p)$/.test(child.type);
     const isPhoto = child.props.className?.split(" ").includes("service-photo") || (child.type === "div" && Children.toArray(child.props.children).some((node) => isValidElement(node) && node.type === "img"));
     const className = [child.props.className, isText ? "scroll-text" : isPhoto ? "scroll-photo" : ""].filter(Boolean).join(" ");

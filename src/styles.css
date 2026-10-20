@@ -231,18 +231,26 @@
 .scroll-text.scroll-shown .reveal-word {
   opacity: 1; filter: blur(0); transform: translateY(0) rotate(0);
 }
-.scroll-photo { overflow: hidden; perspective: 1200px; position: relative; }
+.scroll-photo {
+  overflow: hidden;
+  perspective: 1400px;
+  position: relative;
+  transition: box-shadow 1000ms ease calc(var(--reveal-delay) + 350ms);
+}
+.scroll-photo.scroll-shown {
+  box-shadow: 0 28px 60px -26px color-mix(in oklab, var(--primary) 45%, transparent);
+}
 .scroll-photo.scroll-ready > img {
   opacity: 0;
   transform-origin: 50% 100%;
-  transform: rotateX(28deg) rotateY(-14deg) translateZ(-160px) translateY(40px) scale(1.18);
-  filter: blur(10px) saturate(0.4) brightness(1.15);
-  clip-path: inset(18% 12% 18% 12% round 24px);
+  transform: rotateX(34deg) rotateY(-18deg) translateZ(-240px) translateY(64px) scale(1.24);
+  filter: blur(14px) saturate(0.2) brightness(1.25);
+  clip-path: inset(24% 18% 24% 18% round 36px);
   transition:
-    opacity 900ms ease,
-    transform 1600ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 1400ms ease,
-    clip-path 1500ms cubic-bezier(0.76, 0, 0.24, 1);
+    opacity 700ms ease,
+    transform 1500ms cubic-bezier(0.22, 1.35, 0.36, 1),
+    filter 1300ms ease,
+    clip-path 1400ms cubic-bezier(0.76, 0, 0.24, 1);
   transition-delay: var(--reveal-delay);
   will-change: transform, filter, clip-path;
 }
@@ -252,6 +260,19 @@
   filter: blur(0) saturate(1) brightness(1);
   clip-path: inset(0 0 0 0 round 0);
 }
+.scroll-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 15% 0%, color-mix(in oklab, var(--mint) 45%, transparent), transparent 60%),
+    radial-gradient(120% 90% at 90% 100%, color-mix(in oklab, var(--peach) 40%, transparent), transparent 60%);
+  opacity: 0;
+  transition: opacity 1400ms ease calc(var(--reveal-delay) + 500ms);
+}
+.scroll-photo.scroll-shown::before { opacity: 1; }
 .scroll-photo.scroll-ready::after {
   content: "";
   position: absolute;
@@ -272,6 +293,8 @@
   .scroll-text.scroll-ready .reveal-word { opacity: 1; filter: none; transform: none; }
   .scroll-photo.scroll-ready > img { opacity: 1; clip-path: none; transform: none; filter: none; }
   .scroll-photo.scroll-ready::after { display: none; }
+  .scroll-photo::before { display: none; }
+  .scroll-photo.scroll-shown { box-shadow: none; }
 }
 
 @keyframes route-enter {

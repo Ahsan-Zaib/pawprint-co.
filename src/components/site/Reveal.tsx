@@ -1,9 +1,24 @@
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { Children, cloneElement, isValidElement, useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
-/**
- * Fades + slides content in when it scrolls into view. Honors
- * prefers-reduced-motion (content shows immediately).
- */
+// Preserve semantic text and React ownership while revealing words individually.
+function prepareContent(children: ReactNode, text = false, wordIndex = { value: 0 }): ReactNode {
+  return Children.map(children, (child) => {
+    if (typeof child === "string" && text) {
+      return child.split(/(\s+)/).map((word, i) => /^\s*$/.test(word) ? word : (
+        <span key={i} className="reveal-word" style={{ "--word-delay": `${Math.min(wordIndex.value++ * 36, 720)}ms` } as CSSProperties}>{word}</span>
+      ));
+    }
+    if (!isValidElement<{ children?: ReactNode; className?: string }>(child) || typeof child.type !== "string") return child;
+    const isText = /^(h[1-3]|p)$/.test(child.type);
+    const isPhoto = child.props.className?.split(" ").includes("service-photo") || (child.type === "div" && Children.toArray(child.props.children).some((node) => isValidElement(node) && node.type === "img"));
+    const className = [child.props.className, isText ? "scroll-text" : isPhoto ? "scroll-photo" : ""].filter(Boolean).join(" ");
+    return cloneElement(child, {
+      className,
+      children: prepareContent(child.props.children, text || isText, isText ? { value: 0 } : wordIndex),
+    });
+  });
+}
+
 export function Reveal({
   children,
   className = "",
@@ -17,37 +32,38 @@ export function Reveal({
   as?: "div" | "section" | "li" | "span";
 }) {
   const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
-
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(true);
-      return;
-    }
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    const targets = node.querySelectorAll<HTMLElement>(".scroll-text, .scroll-photo");
+    targets.forEach((target) => target.classList.add("scroll-ready"));
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setVisible(true);
-          io.disconnect();
-        }
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("scroll-shown");
+          io.unobserve(entry.target);
+        });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0.12, rootMargin: "0px 0px -30px 0px" },
     );
-    io.observe(node);
-    return () => io.disconnect();
+    targets.forEach((target) => io.observe(target));
+    return () => {
+      io.disconnect();
+      targets.forEach((target) => target.classList.remove("scroll-ready", "scroll-shown"));
+    };
   }, []);
 
-  const style: CSSProperties = delay ? { transitionDelay: `${delay}ms` } : {};
+  const style = { "--reveal-delay": `${delay}ms` } as CSSProperties;
   const Comp = Tag as "div";
   return (
     <Comp
       ref={ref as never}
       style={style}
-      className={`reveal ${visible ? "reveal-visible" : ""} ${className}`}
+      className={`reveal ${className}`}
     >
-      {children}
+      {prepareContent(children)}
     </Comp>
   );
 }
